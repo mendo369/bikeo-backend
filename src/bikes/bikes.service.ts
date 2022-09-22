@@ -1,19 +1,29 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import { CreateBikeDto } from './dto/create-bike.dto';
 import { UpdateBikeDto } from './dto/update-bike.dto';
+import { Bike, BikeDocument } from './schema/bike.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class BikesService {
-  create(createBikeDto: CreateBikeDto) {
-    return 'This action adds a new bike';
+  constructor(
+    @InjectModel(Bike.name) private bikeModule: Model<BikeDocument>,
+  ) {}
+
+  async create(createBikeDto: CreateBikeDto) {
+    const bikeCreated = await this.bikeModule.create(createBikeDto);
+    return bikeCreated;
   }
 
-  findAll() {
-    return `This action returns all bikes`;
+  async findAll() {
+    const bikes = await this.bikeModule.find({});
+    return bikes;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} bike`;
+  async findOne(id: string) {
+    const bike = await this.bikeModule.find({ _id: id });
+    return bike;
   }
 
   update(id: number, updateBikeDto: UpdateBikeDto) {
