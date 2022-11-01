@@ -12,12 +12,21 @@ export class CreateBikeDto {
   model: number;
 
   @IsNotEmpty()
-  size: string;
+  description: string;
+
+  @IsNotEmpty()
+  sizes: string[];
 
   @IsNotEmpty()
   @IsNumber()
   price: number;
 
   @IsNotEmpty()
-  image: string;
+  images: string[];
+
+  @IsNotEmpty()
+  components: object[];
+
+  @IsNotEmpty()
+  contacts: object[];
 }

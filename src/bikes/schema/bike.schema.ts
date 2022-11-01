@@ -15,13 +15,22 @@ export class Bike {
   model: number;
 
   @Prop()
-  size: string;
+  description: string;
+
+  @Prop([String])
+  sizes: string[];
 
   @Prop()
   price: number;
 
-  @Prop()
-  image: string;
+  @Prop([String])
+  images: string[];
+
+  @Prop([Object])
+  components: object[];
+
+  @Prop([Object])
+  contacts: object[];
 }
 
 export const Bikeschema = SchemaFactory.createForClass(Bike);
